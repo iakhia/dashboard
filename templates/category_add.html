@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<form class="user", method="post">
+    {% csrf_token %}
+    <div class="form-group">
+        <input type="text" class="form-control form-control-user"
+            id="exampleInputEmail" aria-describedby="emailHelp"
+            placeholder="Категория", name="category">
+    </div>
+    
+    <button class="btn btn-primary btn-user btn-block">Add category</button>
+{% endblock %}
