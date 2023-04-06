@@ -1,13 +1,13 @@
 from django.db.models import Sum
 from django.views.generic import ListView, View, DetailView
-from rest_framework.generics import ListAPIView
+from rest_framework.viewsets import ModelViewSet
 from django.shortcuts import render, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from dashboard.models import Category, Payment
 from dashboard.serializers import CategorySerializer
 
-class CategoryListAPIView(ListAPIView):
+class CategoryViewSet(ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
   

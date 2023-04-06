@@ -23,7 +23,7 @@ urlpatterns = [
     path('', include('dashboard.urls') ),
     path('accounts/', include('django.contrib.auth.urls')),
     path('accounts/', include('accounts.urls')),
-    path('api/v1/dashboard/', include('dashboard.urls')),
+    path('dashboard/', include('dashboard.urls')),
     path('api/v1/schema/', SpectacularAPIView.as_view(), name='schema'),
     # Optional UI:
     path('api/v1/schema/swagger-ui/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
