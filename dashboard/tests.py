@@ -18,17 +18,17 @@ class CategoryTests(TestCase):
         password="admin.admin",
         )
 
-    #     self.category = Category.objects.create(
-    #         name = "games",
-    #         author = User  
-    #     )
+        self.category = Category.objects.create(
+             name = "games",
+             author = self.author
+         )
 
-    # def test_category_str(self):
-    #          self.assertEqual(str(self.category), self.category.name)
+    def test_category_str(self):
+              self.assertEqual(str(self.category), self.category.name)
 
-    # def test_category_content(self):
-    #     self.assertEqual(f"{self.category.name}", "games")
-    #     self.assertEqual(f"{self.category.author}", "")
+    def test_category_content(self):
+         self.assertEqual(f"{self.category.name}", "games")
+         self.assertEqual(self.category.author, self.author)
 
     def test_category_view(self):
             response = self.client.get(reverse("home"))
