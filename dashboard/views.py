@@ -7,43 +7,44 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from dashboard.models import Category, Payment
 from dashboard.serializers import CategorySerializer
 
+
 class CategoryViewSet(ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
-  
+
 
 class HomePageView(ListView):
-    template_name = 'index.html'
-    context_object_name = 'categories'
+    template_name = "index.html"
+    context_object_name = "categories"
 
     def get_queryset(self):
         if self.request.user.is_anonymous:
             return
-        queryset = Category.objects.filter(author = self.request.user).prefetch_related(
-            'payments').annotate(payments_sum = Sum('payments__summa'))
+        queryset = (
+            Category.objects.filter(author=self.request.user)
+            .prefetch_related("payments")
+            .annotate(payments_sum=Sum("payments__summa"))
+        )
         return queryset
 
+
 class CategoryAddView(View):
-    
     def get(self, request, *args, **kwargs):
-        return render(request, 'category_add.html')
-    
-    
+        return render(request, "category_add.html")
+
     def post(self, request, *args, **kwargs):
-        name = request.POST.get('category')
-        category = Category(name=name, author = request.user)
+        name = request.POST.get("category")
+        category = Category(name=name, author=request.user)
         category.save()
-        return redirect('home')  
-    
+        return redirect("home")
+
+
 class PaymentAddView(DetailView):
     model = Category
-    template_name = 'payment_add.html'
-    
-    
-    
+    template_name = "payment_add.html"
+
     def post(self, request, *args, **kwargs):
-        summa = request.POST.get('summa')
-        payment = Payment(summa=summa, category_id = kwargs.get('pk'))
+        summa = request.POST.get("summa")
+        payment = Payment(summa=summa, category_id=kwargs.get("pk"))
         payment.save()
-        return redirect('home')  
-    
+        return redirect("home")

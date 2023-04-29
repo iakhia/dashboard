@@ -2,7 +2,8 @@ from rest_framework.serializers import ModelSerializer
 
 from dashboard.models import Category
 
+
 class CategorySerializer(ModelSerializer):
     class Meta:
         model = Category
-        fields = ('id', 'name', 'author')
+        fields = ("id", "name", "author")

@@ -7,7 +7,6 @@ import django.utils.timezone
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
     dependencies = [
@@ -16,28 +15,57 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='Category',
+            name="Category",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100, verbose_name='Название')),
-                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100, verbose_name="Название")),
+                (
+                    "author",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Категория',
-                'verbose_name_plural': 'Категории',
+                "verbose_name": "Категория",
+                "verbose_name_plural": "Категории",
             },
         ),
         migrations.CreateModel(
-            name='Payment',
+            name="Payment",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('summa', models.PositiveIntegerField(verbose_name='Сумма')),
-                ('created_at', models.DateField(default=django.utils.timezone.now)),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='payments', to='dashboard.category')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("summa", models.PositiveIntegerField(verbose_name="Сумма")),
+                ("created_at", models.DateField(default=django.utils.timezone.now)),
+                (
+                    "category",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="payments",
+                        to="dashboard.category",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Платеж',
-                'verbose_name_plural': 'Платежи',
+                "verbose_name": "Платеж",
+                "verbose_name_plural": "Платежи",
             },
         ),
     ]
